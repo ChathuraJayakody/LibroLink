@@ -1,0 +1,14 @@
+<div class="book-detail-container" *ngIf="!loading && book">
+    <h2>{{ book.title }}</h2>
+    <img [src]="book.coverImage || 'assets/default-book.png'" alt="Book cover" class="book-cover"/>
+    <p><strong>Author:</strong> {{ book.author }}</p>
+    <p><strong>Price:</strong> {{ book.price | currency }}</p>
+    <p><strong>Stock:</strong> {{ book.stock > 0 ? 'Available' : 'Out of stock' }}</p>
+    <p><strong>Description:</strong></p>
+    <p>{{ book.description }}</p>
+    <button [disabled]="book.stock === 0" (click)="addToCart(book)">Add to Cart</button>
+  </div>
+  
+  <div *ngIf="loading">Loading book details...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+  

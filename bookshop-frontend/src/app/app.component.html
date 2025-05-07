@@ -1,0 +1,12 @@
+<nav class="navbar">
+  <a routerLink="/books/list" routerLinkActive="active">Books</a>
+  <a routerLink="/cart/view" routerLinkActive="active">Cart</a>
+  <a routerLink="/orders/history" routerLinkActive="active">Orders</a>
+  <a routerLink="/profile/view" routerLinkActive="active">Profile</a>
+  <a routerLink="/auth/login" *ngIf="!isLoggedIn" routerLinkActive="active">Login</a>
+  <a routerLink="/auth/register" *ngIf="!isLoggedIn" routerLinkActive="active">Register</a>
+  <!-- <a *ngIf="isLoggedIn" (click)="logout()" style="cursor:pointer;">Logout</a> -->
+</nav>
+<main>
+  <!-- <router-outlet></router-outlet> -->
+</main>

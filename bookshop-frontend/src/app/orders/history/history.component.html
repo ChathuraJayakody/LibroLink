@@ -1,0 +1,25 @@
+<div class="order-history-container">
+    <h2>Your Order History</h2>
+    <div *ngIf="loading">Loading order history...</div>
+    <div *ngIf="error" class="error">{{ error }}</div>
+    <div *ngIf="!loading && orders.length === 0">You have no orders yet.</div>
+    <div *ngFor="let order of orders" class="order-card" [ngClass]="order.status">
+      <div class="order-header">
+        <span><strong>Order ID:</strong> {{ order.id }}</span>
+        <span><strong>Date:</strong> {{ order.createdAt | date:'medium' }}</span>
+        <span><strong>Status:</strong> {{ order.status | titlecase }}</span>
+      </div>
+      <div class="order-items">
+        <div *ngFor="let item of order.items" class="order-item">
+          <span>{{ item.title }}</span>
+          <span>Qty: {{ item.quantity }}</span>
+          <span>Price: {{ item.price | currency }}</span>
+          <span>Subtotal: {{ item.price * item.quantity | currency }}</span>
+        </div>
+      </div>
+      <div class="order-total">
+        <strong>Total: {{ order.total | currency }}</strong>
+      </div>
+    </div>
+  </div>
+  

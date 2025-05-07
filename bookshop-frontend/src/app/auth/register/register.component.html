@@ -1,0 +1,59 @@
+<div class="register-container">
+    <h2>Sign Up</h2>
+    <form (ngSubmit)="onSubmit()" #f="ngForm" novalidate>
+      <div>
+        <label for="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          [(ngModel)]="form.username"
+          required
+          minlength="3"
+          maxlength="20"
+          #username="ngModel"
+        />
+        <div *ngIf="f.submitted && username.errors" class="error">
+          <div *ngIf="username.errors.required">Username is required</div>
+          <div *ngIf="username.errors.minlength">At least 3 characters</div>
+          <div *ngIf="username.errors.maxlength">At most 20 characters</div>
+        </div>
+      </div>
+      <div>
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          [(ngModel)]="form.email"
+          required
+          email
+          #email="ngModel"
+        />
+        <div *ngIf="f.submitted && email.errors" class="error">
+          <div *ngIf="email.errors.required">Email is required</div>
+          <div *ngIf="email.errors.email">Invalid email address</div>
+        </div>
+      </div>
+      <div>
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          [(ngModel)]="form.password"
+          required
+          minlength="6"
+          #password="ngModel"
+        />
+        <div *ngIf="f.submitted && password.errors" class="error">
+          <div *ngIf="password.errors.required">Password is required</div>
+          <div *ngIf="password.errors.minlength">At least 6 characters</div>
+        </div>
+      </div>
+      <button type="submit">Sign Up</button>
+      <div *ngIf="isSignUpFailed" class="error">{{ errorMessage }}</div>
+      <div *ngIf="isSuccessful" class="success">Registration successful! Redirecting to login...</div>
+    </form>
+  </div>
+  

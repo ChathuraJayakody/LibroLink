@@ -1,0 +1,33 @@
+<div class="profile-container">
+    <h2>User Profile</h2>
+    <div *ngIf="loading">Loading profile...</div>
+    <div *ngIf="error" class="error">{{ error }}</div>
+  
+    <div *ngIf="!loading && profile">
+      <div *ngIf="!editMode">
+        <div class="profile-field"><strong>Username:</strong> {{ profile.username }}</div>
+        <div class="profile-field"><strong>Email:</strong> {{ profile.email }}</div>
+        <div class="profile-field"><strong>Full Name:</strong> {{ profile.fullName || '-' }}</div>
+        <div class="profile-field"><strong>Phone:</strong> {{ profile.phone || '-' }}</div>
+        <div class="profile-field"><strong>Address:</strong> {{ profile.address || '-' }}</div>
+        <button (click)="enableEdit()">Edit Profile</button>
+      </div>
+      <form *ngIf="editMode" (ngSubmit)="saveProfile()">
+        <div class="profile-field">
+          <label>Full Name:</label>
+          <input [(ngModel)]="updatedProfile.fullName" name="fullName" />
+        </div>
+        <div class="profile-field">
+          <label>Phone:</label>
+          <input [(ngModel)]="updatedProfile.phone" name="phone" />
+        </div>
+        <div class="profile-field">
+          <label>Address:</label>
+          <input [(ngModel)]="updatedProfile.address" name="address" />
+        </div>
+        <button type="submit">Save</button>
+        <button type="button" (click)="cancelEdit()">Cancel</button>
+      </form>
+    </div>
+  </div>
+  

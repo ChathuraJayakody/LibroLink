@@ -1,0 +1,37 @@
+<div class="book-list-container">
+    <h2>Book List</h2>
+  
+    <div class="search-sort-bar">
+      <input
+        type="text"
+        placeholder="Search by title or author"
+        [(ngModel)]="searchTerm"
+        (input)="onSearchChange()"
+      />
+  
+      <select (change)="onSortChange($event.target.value)">
+        <option value="title">Sort by Title</option>
+        <option value="author">Sort by Author</option>
+        <option value="price">Sort by Price</option>
+      </select>
+      <button (click)="onSortChange(sortField)">
+        Sort: {{ sortDirection === 'asc' ? 'Ascending' : 'Descending' }}
+      </button>
+    </div>
+  
+    <div *ngIf="loading">Loading books...</div>
+    <div *ngIf="error" class="error">{{ error }}</div>
+    <div *ngIf="!loading && filteredBooks.length === 0">No books found.</div>
+  
+    <div class="book-list" *ngIf="filteredBooks.length > 0">
+      <div class="book-item" *ngFor="let book of filteredBooks">
+        <img [src]="book.coverImage || 'assets/default-book.png'" alt="Book cover" />
+        <div>
+          <a [routerLink]="['/books/detail', book.id]"><h3>{{ book.title }}</h3></a>
+          <p><strong>Author:</strong> {{ book.author }}</p>
+          <p><strong>Price:</strong> {{ book.price | currency }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
